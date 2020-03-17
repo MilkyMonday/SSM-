@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ccz.dao.LogDao">
+	<select id="selectLogList" resultType="log">
+		select
+		id,time,bewrite
+		from log
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="selectLogListCount" resultType="Integer">
+		select count(*) from log
+	</select>	
+	<insert id="createLog" parameterType="log">
+		insert into log
+		(id,time,bewrite)
+		values
+		(#{id},#{time},#{bewrite})
+	</insert>
+</mapper>
